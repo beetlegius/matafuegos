@@ -1,0 +1,30 @@
+es:
+  toggle_navigation: 'Cambiar navegación'
+  search: "Buscar"
+  brand: "Matafuegos SA"
+  footer: "Copyright Matafuegos S.A. Todos los derechos reservados."
+  view: "Ver más"
+  renew: "Renovar"
+
+  extinguishers:
+    filters:
+      sectors: "Todos los sectores"
+
+  activerecord:
+    models:
+      sector: "Sector"
+      extinguisher: "Matafuego"
+    attributes:
+      sector:
+        name: "Nombre"
+        latitude: "Latitud"
+        longitude: "Longitud"
+      extinguisher:
+        kind: "Tipo"
+        expiration_at: "Expiración"
+
+  extinguisher_mailer:
+    alert:
+      title: "Debés recargar los matafuegos ya que están cerca de la fecha de expiración!"
+      message: "Los siguientes matafuegos requieren revisión."
+      subject: "Hay nuevos matafuegos por revisar"

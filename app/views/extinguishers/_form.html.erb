@@ -1,0 +1,32 @@
+<%= form_for(extinguisher) do |f| %>
+  <% if extinguisher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(extinguisher.errors.count, "error") %> prohibited this extinguisher from being saved:</h2>
+
+      <ul>
+      <% extinguisher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :kind %>
+    <%= f.text_field :kind %>
+  </div>
+
+  <div class="field">
+    <%= f.label :expiration_at %>
+    <%= f.date_select :expiration_at %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sector_id %>
+    <%= f.text_field :sector_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

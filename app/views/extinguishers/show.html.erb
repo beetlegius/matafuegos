@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @extinguisher.kind %>
+</p>
+
+<p>
+  <strong>Expiration at:</strong>
+  <%= @extinguisher.expiration_at %>
+</p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= @extinguisher.sector %>
+</p>
+
+<%= link_to 'Edit', edit_extinguisher_path(@extinguisher) %> |
+<%= link_to 'Back', extinguishers_path %>

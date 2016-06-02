@@ -1,0 +1,8 @@
+<h1><%= t 'extinguisher_mailer.alert.title' %></h1>
+
+<p><%= t 'extinguisher_mailer.alert.message' %></p>
+<ul>
+  <% for extinguisher in @extinguishers %>
+    <li><%= extinguisher.sector.name %> "<%= extinguisher.kind %>" - <%= l extinguisher.expiration_at %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,9 @@
+<tr id="<%= dom_id extinguisher %>" class="<%= extinguisher_tr_class(extinguisher) %>">
+  <td class="text-right">#<%= extinguisher.id %></td>
+  <td><%= extinguisher.sector.name %></td>
+  <td class="text-center"><%= content_tag :span, extinguisher.kind, class: extinguisher_label_class(extinguisher) %></td>
+  <td><%= distance_of_time_in_words_to_now extinguisher.expiration_at %></td>
+  <td>
+    <%= link_to t('view'), extinguisher_path(extinguisher, sector_id: params[:sector_id]), class: 'btn btn-xs btn-info' %>
+  </td>
+</tr>

@@ -1,0 +1,80 @@
+<div class="page-header">
+  <h1><%= Extinguisher.model_name.human.pluralize(I18n.locale) %></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <%= form_tag extinguishers_path, class: 'form-inline', method: :get, remote: true do %>
+      <div class="form-group">
+        <label class="sr-only" for="sector"><%= Extinguisher.human_attribute_name(:sector) %></label>
+        <%= select_tag :sector_id, options_from_collection_for_select(@sectors, :id, :name, params[:sector_id]), class: 'form-control', prompt: t("extinguishers.filters.sectors") %>
+      </div>
+      <button type="submit" class="btn btn-default"><%= t 'search' %></button>
+    <% end %>
+
+    <hr />
+
+    <table id="extinguishers" class="table table-condensed">
+      <thead>
+        <tr>
+          <th class="text-right"><%= Extinguisher.human_attribute_name(:id) %></th>
+          <th><%= Extinguisher.human_attribute_name(:sector) %></th>
+          <th class="text-center"><%= Extinguisher.human_attribute_name(:kind) %></th>
+          <th><%= Extinguisher.human_attribute_name(:expiration_at) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <%= content_tag :tbody, render(@extinguishers) %>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <% if @extinguisher %>
+      <h3>
+        <%= link_to t('renew'), [:renew, @extinguisher], class: 'btn btn-sm btn-success pull-right', method: :patch, remote: true, id: :renew if @extinguisher.is_expiring? %>
+        Matafuegos # <%= @extinguisher.id %> / <%= @extinguisher.sector.name %>
+      </h3>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=800x300&sensor=false&zoom=19&markers=#{@extinguisher.sector.latitude}%2C#{@extinguisher.sector.longitude}", class: 'img-responsive' %>
+      <hr />
+      <table class="table table-condensed">
+        <tbody>
+          <tr>
+            <th>Sector</th>
+            <td><%= @extinguisher.sector.name %></td>
+          <tr>
+            <th>Marca</th>
+            <td>Georgia</td>
+          </tr>
+          <tr>
+            <th>Tipo</th>
+            <td><%= content_tag :span, @extinguisher.kind, class: extinguisher_label_class(@extinguisher) %></td>
+          </tr>
+          <tr>
+            <th>Capacidad nominal</th>
+            <td>5 KG</td>
+          </tr>
+          <tr>
+            <th>Peso con carga</th>
+            <td>8,5 KG</td>
+          </tr>
+          <tr>
+            <th>Dimensiones</th>
+            <td>480 X 225 X 155 MM</td>
+          </tr>
+          <tr>
+            <th>Agente extintor</th>
+            <td>Polvo químico ABC 60</td>
+          </tr>
+          <tr>
+            <th>Tiempo de descarga</th>
+            <td>12 segundos</td>
+          </tr>
+          <tr>
+            <th>Alcance</th>
+            <td>5 - 6 metros</td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
