@@ -7,6 +7,11 @@ indexCtrl = ($scope, Extinguisher, Sector) ->
   $scope.search = {
     order: 'expiration_at'
   }
+  $scope.tabActive = 'list'
+
+  $scope.kinds = ['A', 'AB', 'ABC', 'BC', 'D', 'K']
+
+  $scope.newExtinguisher = {}
 
   $scope.setCurrentExtinguisher = (extinguisher) ->
     $scope.current_extinguisher = extinguisher
@@ -15,6 +20,14 @@ indexCtrl = ($scope, Extinguisher, Sector) ->
   $scope.renew = (extinguisher) ->
     extinguisher.$renew()
     return
+
+  $scope.submit = (extinguisher) ->
+    new Extinguisher(extinguisher).$save().then (result) ->
+      $scope.extinguishers.push(result)
+      $scope.current_extinguisher = result
+      delete $scope.search.sector
+      $scope.newExtinguisher = {}
+      $scope.tabActive = 'list'
 
   return
 

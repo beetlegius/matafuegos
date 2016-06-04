@@ -64,5 +64,11 @@ gem 'rspec'
 
 gem 'active_model_serializers', '~> 0.10.0'
 
-gem 'angularjs-rails'
+# gem 'angularjs-rails'
 gem 'angular-rails-templates'#, '0.2.0'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-angular'
+  gem 'rails-assets-angular-resource'
+  gem 'rails-assets-angular-route'
+end

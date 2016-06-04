@@ -5,17 +5,24 @@
 <div class="row">
   <div class="col-md-6">
 
-    <form class="form-inline">
-      <div class="form-group">
-        <label class="sr-only" for="sector"><%= Extinguisher.human_attribute_name(:sector) %></label>
-        <select ng-model="search.sector" class="form-control" ng-options="sector as sector.name for sector in sectors track by sector.id">
-          <option value=""><%= I18n.t("extinguishers.filters.sectors") %></option>
-        </select>
-      </div>
-    </form>
+    <div class="col-md-8">
+      <form class="form-inline" ng-show="tabActive == 'list'">
+        <div class="form-group">
+          <label class="sr-only" for="sector"><%= Extinguisher.human_attribute_name(:sector) %></label>
+          <select ng-model="search.sector" class="form-control" ng-options="sector as sector.name for sector in sectors track by sector.id">
+            <option value=""><%= I18n.t("extinguishers.filters.sectors") %></option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4 text-right">
+      <a class="btn btn-default" ng-click="tabActive = 'list'" ng-class="{'btn-primary': tabActive == 'list'}">List</a>
+      <a class="btn btn-default" ng-click="tabActive = 'form'" ng-class="{'btn-primary': tabActive == 'form'}">Form</a>
+    </div>
+
     <hr />
 
-    <table id="extinguishers" class="table table-condensed">
+    <table id="extinguishers" class="table table-condensed" ng-show="tabActive == 'list'">
       <thead>
         <tr class="dropup">
           <th ng-click="search.order = 'id'" class="text-right"><%= Extinguisher.human_attribute_name(:id) %> <span ng-show="search.order == 'id'" class="caret"></span></th>
@@ -37,6 +44,37 @@
         </tr>
       </tbody>
     </table>
+
+    <form class="form-horizontal" ng-show="tabActive == 'form'" ng-submit="submit(newExtinguisher)">
+      <div class="form-group">
+        <label for="kind" class="col-sm-2 control-label"><%= Extinguisher.human_attribute_name(:kind) %></label>
+        <div class="col-sm-10">
+          <select class="form-control" id="kind" ng-model="newExtinguisher.kind" ng-options='k as k for k in <%= Extinguisher::KINDS %> track by k'>
+            <option value=""><%= I18n.t 'select_a_kind' %></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="expiration_at" class="col-sm-2 control-label"><%= Extinguisher.human_attribute_name(:expiration_at) %></label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="expiration_at" ng-model="newExtinguisher.expiration_at">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sector_id" class="col-sm-2 control-label"><%= Extinguisher.human_attribute_name(:sector) %></label>
+        <div class="col-sm-10">
+          <select class="form-control" id="sector_id" ng-model="newExtinguisher.sector_id" ng-options='sector.id as sector.name for sector in sectors track by sector.id'>
+            <option value=""><%= I18n.t 'select_a_sector' %></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default"><%= I18n.t 'submit' %></button>
+        </div>
+      </div>
+    </form>
+
   </div>
   <div class="col-md-6" ng-show="current_extinguisher">
     <h3>

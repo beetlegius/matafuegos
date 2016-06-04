@@ -5,6 +5,10 @@ es:
   footer: "Copyright Matafuegos S.A. Todos los derechos reservados."
   view: "Ver más"
   renew: "Renovar"
+  submit: "Enviar"
+
+  select_a_kind: "Por favor selecciona un tipo"
+  select_a_sector: "Por favor selecciona un sector"
 
   extinguishers:
     filters:
