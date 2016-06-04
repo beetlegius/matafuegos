@@ -1,3 +1,26 @@
-Index
+<div class="page-header">
+  <h1><%= Sector.model_name.human.pluralize(I18n.locale) %></h1>
+</div>
 
-{{sectors}}
+<div class="row">
+  <div class="col-md-6">
+
+    <table id="sectors" class="table table-condensed">
+      <thead>
+        <tr>
+          <th class="text-right"><%= Sector.human_attribute_name(:id) %></th>
+          <th><%= Sector.human_attribute_name(:name) %></th>
+          <th class="text-right"><%= Sector.human_attribute_name(:latitude) %></th>
+          <th class="text-right"><%= Sector.human_attribute_name(:longitude) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="sector in sectors | orderBy: 'name'" id="sector_{{sector.id}}">
+          <td class="text-right">#{{sector.id}}</td>
+          <td>{{sector.name}}</td>
+          <td class="text-right">{{sector.latitude}}</td>
+          <td class="text-right">{{sector.longitude}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

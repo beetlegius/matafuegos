@@ -1,3 +1,88 @@
-Index
+<div class="page-header">
+  <h1><%= Extinguisher.model_name.human.pluralize(I18n.locale) %></h1>
+</div>
 
-{{extinguishers}}
+<div class="row">
+  <div class="col-md-6">
+
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="sector"><%= Extinguisher.human_attribute_name(:sector) %></label>
+        <select ng-model="search.sector" class="form-control" ng-options="sector as sector.name for sector in sectors track by sector.id">
+          <option value=""><%= I18n.t("extinguishers.filters.sectors") %></option>
+        </select>
+      </div>
+    </form>
+    <hr />
+
+    <table id="extinguishers" class="table table-condensed">
+      <thead>
+        <tr class="dropup">
+          <th ng-click="search.order = 'id'" class="text-right"><%= Extinguisher.human_attribute_name(:id) %> <span ng-show="search.order == 'id'" class="caret"></span></th>
+          <th ng-click="search.order = 'sector.name'"><%= Extinguisher.human_attribute_name(:sector) %> <span ng-show="search.order == 'sector.name'" class="caret"></span></th>
+          <th ng-click="search.order = 'kind'" class="text-center"><%= Extinguisher.human_attribute_name(:kind) %> <span ng-show="search.order == 'kind'" class="caret"></span></th>
+          <th ng-click="search.order = 'expiration_at'"><%= Extinguisher.human_attribute_name(:expiration_at) %> <span ng-show="search.order == 'expiration_at'" class="caret"></span></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="extinguisher in extinguishers | orderBy: search.order | filter : { sector : search.sector || '!' }" id="extinguisher_{{extinguisher.id}}" ng-class="extinguisher.tr_class">
+          <td class="text-right">#{{extinguisher.id}}</td>
+          <td>{{extinguisher.sector.name}}</td>
+          <td class="text-center"><span ng-class="extinguisher.label_class">{{extinguisher.kind}}</span></td>
+          <td>{{extinguisher.expiration_at_in_words}}</td>
+          <td>
+            <a ng-click="setCurrentExtinguisher(extinguisher)" class="btn btn-xs btn-info"><%= I18n.t('view') %></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6" ng-show="current_extinguisher">
+    <h3>
+      <a ng-click="renew(current_extinguisher)" class=" btn btn-sm btn-success pull-right" id="renew" ng-show="current_extinguisher.is_expiring"><%= I18n.t('renew') %></a>
+      Matafuegos # {{current_extinguisher.id}} / {{current_extinguisher.sector.name}}
+    </h3>
+    <img ng-src="http://maps.google.com/maps/api/staticmap?size=800x300&sensor=false&zoom=19&markers={{current_extinguisher.sector.latitude}}%2C{{current_extinguisher.sector.longitude}}" class='img-responsive img-thumbnail' />
+    <hr />
+    <table class="table table-condensed">
+      <tbody>
+        <tr>
+          <th>Sector</th>
+          <td>{{current_extinguisher.sector.name}}</td>
+        <tr>
+          <th>Marca</th>
+          <td>Georgia</td>
+        </tr>
+        <tr>
+          <th>Tipo</th>
+          <td><span ng-class="current_extinguisher.label_class">{{current_extinguisher.kind}}</td>
+        </tr>
+        <tr>
+          <th>Capacidad nominal</th>
+          <td>5 KG</td>
+        </tr>
+        <tr>
+          <th>Peso con carga</th>
+          <td>8,5 KG</td>
+        </tr>
+        <tr>
+          <th>Dimensiones</th>
+          <td>480 X 225 X 155 MM</td>
+        </tr>
+        <tr>
+          <th>Agente extintor</th>
+          <td>Polvo químico ABC 60</td>
+        </tr>
+        <tr>
+          <th>Tiempo de descarga</th>
+          <td>12 segundos</td>
+        </tr>
+        <tr>
+          <th>Alcance</th>
+          <td>5 - 6 metros</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

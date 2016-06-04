@@ -4,6 +4,7 @@ module ExtinguishersHelper
     case extinguisher.expiration_at
     when (Date.today..1.week.from_now) then 'danger'
     when (Date.today..Extinguisher::EXPIRATION_LIMIT) then 'warning'
+    else 'text-muted'
     end
   end
 

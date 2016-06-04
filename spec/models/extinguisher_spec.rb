@@ -63,7 +63,7 @@ RSpec.describe Extinguisher, type: :model do
     end
 
     it 'updates the expiration at' do
-      expect{extinguisher.renew}.to change{extinguisher.expiration_at}.by(365)
+      expect{extinguisher.renew}.to change{extinguisher.expiration_at}.by(365) # Revisar luego
     end
 
   end

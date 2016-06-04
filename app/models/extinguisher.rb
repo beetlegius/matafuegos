@@ -13,7 +13,7 @@
 class Extinguisher < ApplicationRecord
 
   KINDS = [A = 'A', AB = 'AB', ABC = 'ABC', BC = 'BC', D = 'D', K = 'K']
-  EXPIRATION_LIMIT = 2.weeks.from_now
+  EXPIRATION_LIMIT = 2.weeks.from_now.to_date
 
   belongs_to :sector
 
