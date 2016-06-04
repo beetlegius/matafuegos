@@ -10,11 +10,14 @@
 #  updated_at :datetime         not null
 #
 
-class Sector < ApplicationRecord
-  has_many :extinguishers
+FactoryGirl.define do
+  factory :sector do
+    sequence(:name) { |i| "Sector #{i}" }
+    latitude { [-1, 1].sample * rand(-34.0..54.0) }
+    longitude { [-1, 1].sample * rand(-34.0..54.0) }
 
-  validates :name, presence: true
-  validates :latitude, :longitude, numericality: true, allow_nil: true
-
-  default_scope -> { order :name }
+    factory :invalid_sector do
+      name nil
+    end
+  end
 end

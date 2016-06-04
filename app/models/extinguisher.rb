@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: extinguishers
+#
+#  id            :integer          not null, primary key
+#  kind          :string
+#  expiration_at :date
+#  sector_id     :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class Extinguisher < ApplicationRecord
 
   KINDS = [A = 'A', AB = 'AB', ABC = 'ABC', BC = 'BC', D = 'D', K = 'K']
