@@ -1,0 +1,19 @@
+<div ng-show="sector">
+  <h3>
+    Sector <span ng-show="sector.id"># {{sector.id}}</span> / {{sector.name}}
+  </h3>
+  <img ng-show="sector.latitude && sector.longitude" ng-src="http://maps.google.com/maps/api/staticmap?size=800x300&sensor=false&zoom=19&markers={{sector.latitude}}%2C{{sector.longitude}}" class='img-responsive img-thumbnail' />
+  <hr />
+  <table class="table table-condensed">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <td>{{sector.name}}</td>
+      </tr>
+      <tr>
+        <th>Coordenadas</th>
+        <td><span ng-show="sector.latitude && sector.longitude">{{sector.latitude}},{{sector.longitude}}</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

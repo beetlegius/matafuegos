@@ -3,8 +3,8 @@ module Api
     before_action :get_sector, only: [:show, :update, :destroy]
 
     def index
-      sectors = Sector.all
-      render json: sectors, status: 200
+      @sectors = Sector.all
+      render json: @sectors, status: 200
     end
 
     def show
@@ -29,7 +29,7 @@ module Api
     protected
 
     def render_sector(status = 200)
-      render json: @sector, status: status
+      render json: @sector, status: status, location: [:api, @sector]
     end
 
     def sector_params

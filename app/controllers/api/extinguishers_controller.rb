@@ -3,8 +3,8 @@ module Api
     before_action :get_extinguisher, only: [:show, :update, :destroy, :renew]
 
     def index
-      extinguishers = Extinguisher.includes(:sector).from_sector(params[:sector_id]).order(:expiration_at)
-      render json: extinguishers, status: 200
+      @extinguishers = Extinguisher.includes(:sector).from_sector(params[:sector_id]).order(:expiration_at)
+      render json: @extinguishers, status: 200
     end
 
     def show
@@ -34,7 +34,7 @@ module Api
     protected
 
     def render_extinguisher(status = 200)
-      render json: @extinguisher, status: status
+      render json: @extinguisher, status: status, location: [:api, @extinguisher]
     end
 
     def extinguisher_params

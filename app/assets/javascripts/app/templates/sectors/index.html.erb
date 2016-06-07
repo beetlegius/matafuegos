@@ -3,15 +3,23 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
 
-    <table id="sectors" class="table table-condensed">
+    <div class="text-right">
+      <a class="btn btn-default" ng-click="tabActive = 'list'" ng-class="{'btn-primary': tabActive == 'list'}">List</a>
+      <a class="btn btn-default" ng-click="tabActive = 'form'; current_sector = newSector" ng-class="{'btn-primary': tabActive == 'form'}">Form</a>
+    </div>
+
+    <hr />
+
+    <table id="sectors" class="table table-condensed" ng-show="tabActive == 'list'">
       <thead>
         <tr>
           <th class="text-right"><%= Sector.human_attribute_name(:id) %></th>
           <th><%= Sector.human_attribute_name(:name) %></th>
           <th class="text-right"><%= Sector.human_attribute_name(:latitude) %></th>
           <th class="text-right"><%= Sector.human_attribute_name(:longitude) %></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +28,17 @@
           <td>{{sector.name}}</td>
           <td class="text-right">{{sector.latitude}}</td>
           <td class="text-right">{{sector.longitude}}</td>
+          <td>
+            <a ng-click="setCurrentSector(sector)" class="btn btn-xs btn-info"><%= I18n.t('view') %></a>
+          </td>
         </tr>
       </tbody>
     </table>
+
+    <sector-form ng-show="tabActive == 'form'" sector="newSector"></sector-form>
   </div>
+
+  <div class="col-md-6">
+    <sector sector="current_sector"></sector>
+  </div>
+</div>
